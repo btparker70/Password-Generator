@@ -8,7 +8,7 @@ function writePassword() {
 
 	passwordText.value = password;
 
-	
+
 }
 
 // Add event listener to generate button
@@ -29,14 +29,63 @@ function generatePassword() {
 	while (true) {
 		var pwdLower = confirm("Add lowercase characters?");
 		var pwdUpper = confirm("Add uppercase characters?");
-		var PwdNumeric = confirm("Add numerical characters?");
+		var pwdNumeric = confirm("Add numerical characters?");
 		var pwdSpecial = confirm("Add special characters?");
 		//Password must have one type of character
-		if ((pwdLower === true) || (pwdUpper === true) || (PwdNumeric === true) || (pwdSpecial === true)) {
+		if ((pwdLower === true) || (pwdUpper === true) || (pwdNumeric === true) || (pwdSpecial === true)) {
 			break;
 		} else (alert("Your password must contain at least one type of character."));
 	}
-}; 	
+	
+	bigStr = '';
+	//Generates random lowercase characters
+	while (pwdLower) {
+		function lowerMaker(length) {
+			var str = '';
+			for (i = 0; i < 10; i++) {
+				str += (String.fromCharCode(randomNum(97, 122)));
+			}
+			return str;
+		}
+		return bigStr.concat(lowerMaker(pwdLength));
+	}
+	//Generates random uppercase characters
+	while (pwdUpper) {
+		function upperMaker(length) {
+			var str = '';
+			for (i = 0; i < 10; i++) {
+				str += (String.fromCharCode(randomNum(65, 90)));
+			}
+			return str;
+		}
+		return bigStr.concat(upperMaker(pwdLength));
+	}
+	//Generates random numeric characters
+	while (pwdNumeric) {
+		function numericMaker(length) {
+			var str = '';
+			for (i = 0; i < 10; i++) {
+				str += (String.fromCharCode(randomNum(48, 57)));
+			}
+			return str;
+		}
+		return numericStr;
+	}
+	//Generates random special characters
+	while (pwdSpecial) {
+		function specialMaker(length) {
+			var str = '';
+			for (i = 0; i < 10; i++) {
+				str += (String.fromCharCode(randomNum(33, 47)));
+			}
+			return str;
+		}
+		return specialStr;
+	}
+	//Combines strings
+	console.log(lowerStr);
+	return bigStr.concat(lowerStr, upperStr, numericStr, specialStr);
+};
 
 //console.log(String.fromCharCode(65));
 
@@ -57,7 +106,7 @@ function lowerMaker() {
 		word += (String.fromCharCode(randomNum(97, 122)));
 	}
 	console.log(word);
-	}
+}
 
 var lowerBool = false;
 
