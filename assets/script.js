@@ -17,11 +17,24 @@ generateBtn.addEventListener("click", writePassword);
 
 //Function That generates password
 function generatePassword() {
+	//Prompts for password length
 	while (true) {
-		var pwdLen = prompt("How many characters in length is your password?");
-		if ((pwdLen > 8) && (pwdLen < 128)) {
+		var pwdLength = prompt("How many characters in length is your password?");
+		//Password length limiters
+		if ((pwdLength > 8) && (pwdLength < 128)) {
 			break;
-		} else (alert("Your password must be at least 8 characters and no more than 128 characters in length."));
+		} else (alert("Your password must be at least 8 characters long and no more than 128 characters in length."));
+	}
+	//User chooses character types
+	while (true) {
+		var pwdLower = confirm("Add lowercase characters?");
+		var pwdUpper = confirm("Add uppercase characters?");
+		var PwdNumeric = confirm("Add numerical characters?");
+		var pwdSpecial = confirm("Add special characters?");
+		//Password must have one type of character
+		if ((pwdLower === true) || (pwdUpper === true) || (PwdNumeric === true) || (pwdSpecial === true)) {
+			break;
+		} else (alert("Your password must contain at least one type of character."));
 	}
 }; 	
 
