@@ -8,6 +8,7 @@ function writePassword() {
 
 	passwordText.value = password;
 
+	
 }
 
 // Add event listener to generate button
@@ -15,7 +16,14 @@ generateBtn.addEventListener("click", writePassword);
 
 
 //Function That generates password
-function generatePassword() { };
+function generatePassword() {
+	while (true) {
+		var pwdLen = prompt("How many characters in length is your password?");
+		if ((pwdLen > 8) && (pwdLen < 128)) {
+			break;
+		} else (alert("Your password must be at least 8 characters and no more than 128 characters in length."));
+	}
+}; 	
 
 //console.log(String.fromCharCode(65));
 
@@ -30,8 +38,19 @@ function randomNum(min, max) {
 //console.log(randomNum(97, 122));
 console.log(String.fromCharCode(randomNum(97, 122)));
 
-var word = '';
-for (i = 0; i < 10; i++) {
-	word += (String.fromCharCode(randomNum(97, 122)));
+function lowerMaker() {
+	var word = '';
+	for (i = 0; i < 10; i++) {
+		word += (String.fromCharCode(randomNum(97, 122)));
+	}
+	console.log(word);
+	}
+
+var lowerBool = false;
+
+if (lowerBool === true) {
+	lowerMaker();
+	console.log("On");
+} else {
+	console.log("Off")
 }
-console.log(word);
