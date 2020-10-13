@@ -38,54 +38,38 @@ function generatePassword() {
 	}
 	
 	bigStr = '';
-	//Generates random lowercase characters
-	while (pwdLower) {
-		function lowerMaker(length) {
-			var str = '';
-			for (i = 0; i < 10; i++) {
-				str += (String.fromCharCode(randomNum(97, 122)));
-			}
-			return str;
+	var lowerStr = '';
+	var upperStr = '';
+	var numericStr = '';
+	var specialStr = '';
+	//Generates string of characters
+	function stringMaker(length, asciiMin, asciiMax) {
+		var str = '';
+		for (i = 0; i < length; i++) {
+			str += (String.fromCharCode(randomNum(asciiMin, asciiMax)));
 		}
-		return bigStr.concat(lowerMaker(pwdLength));
+		return str;
 	}
-	//Generates random uppercase characters
-	while (pwdUpper) {
-		function upperMaker(length) {
-			var str = '';
-			for (i = 0; i < 10; i++) {
-				str += (String.fromCharCode(randomNum(65, 90)));
-			}
-			return str;
-		}
-		return bigStr.concat(upperMaker(pwdLength));
+	//Parameters for specific types of characters
+
+	if (pwdLower) {
+		lowerStr += stringMaker(pwdLength, 97, 122);
 	}
-	//Generates random numeric characters
-	while (pwdNumeric) {
-		function numericMaker(length) {
-			var str = '';
-			for (i = 0; i < 10; i++) {
-				str += (String.fromCharCode(randomNum(48, 57)));
-			}
-			return str;
-		}
-		return numericStr;
+	if (pwdUpper) {
+		upperStr += stringMaker(pwdLength, 65, 90);
 	}
-	//Generates random special characters
-	while (pwdSpecial) {
-		function specialMaker(length) {
-			var str = '';
-			for (i = 0; i < 10; i++) {
-				str += (String.fromCharCode(randomNum(33, 47)));
-			}
-			return str;
-		}
-		return specialStr;
+	if (pwdNumeric) {
+		numericStr += stringMaker(pwdLength, 48, 57);
 	}
-	//Combines strings
-	console.log(lowerStr);
-	return bigStr.concat(lowerStr, upperStr, numericStr, specialStr);
+	if (pwdSpecial) {
+		specialStr += stringMaker(pwdLength, 33, 47);
+	}
+	
+	return lowerStr + upperStr;
+	
 };
+
+// return bigStr.concat(lowerStr, upperStr, numericStr, specialStr);
 
 //console.log(String.fromCharCode(65));
 
@@ -98,21 +82,68 @@ function randomNum(min, max) {
 }
 
 //console.log(randomNum(97, 122));
-console.log(String.fromCharCode(randomNum(97, 122)));
+// console.log(String.fromCharCode(randomNum(97, 122)));
 
-function lowerMaker() {
-	var word = '';
-	for (i = 0; i < 10; i++) {
-		word += (String.fromCharCode(randomNum(97, 122)));
-	}
-	console.log(word);
-}
+// function lowerMaker() {
+// 	var word = '';
+// 	for (i = 0; i < 10; i++) {
+// 		word += (String.fromCharCode(randomNum(97, 122)));
+// 	}
+// 	console.log(word);
+// }
 
-var lowerBool = false;
+// var lowerBool = false;
 
-if (lowerBool === true) {
-	lowerMaker();
-	console.log("On");
-} else {
-	console.log("Off")
-}
+// if (lowerBool === true) {
+// 	lowerMaker();
+// 	console.log("On");
+// } else {
+// 	console.log("Off")
+// }
+
+
+//Generates random lowercase characters
+	// while (pwdLower) {
+	// 	function lowerMaker(length) {
+	// 		var str = '';
+	// 		for (i = 0; i < 10; i++) {
+	// 			str += (String.fromCharCode(randomNum(97, 122)));
+	// 		}
+	// 		return str;
+	// 	}
+	// 	return bigStr.concat(lowerMaker(pwdLength));
+	// }
+	//Generates random uppercase characters
+	// while (pwdUpper) {
+	// 	function upperMaker(length) {
+	// 		var str = '';
+	// 		for (i = 0; i < 10; i++) {
+	// 			str += (String.fromCharCode(randomNum(65, 90)));
+	// 		}
+	// 		return str;
+	// 	}
+	// 	return bigStr.concat(upperMaker(pwdLength));
+	// }
+	// //Generates random numeric characters
+	// while (pwdNumeric) {
+	// 	function numericMaker(length) {
+	// 		var str = '';
+	// 		for (i = 0; i < 10; i++) {
+	// 			str += (String.fromCharCode(randomNum(48, 57)));
+	// 		}
+	// 		return str;
+	// 	}
+	// 	return numericStr;
+	// }
+	// //Generates random special characters
+	// while (pwdSpecial) {
+	// 	function specialMaker(length) {
+	// 		var str = '';
+	// 		for (i = 0; i < 10; i++) {
+	// 			str += (String.fromCharCode(randomNum(33, 47)));
+	// 		}
+	// 		return str;
+	// 	}
+	// 	return specialStr;
+	// }
+	//Combines strings
