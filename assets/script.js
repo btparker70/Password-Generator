@@ -21,7 +21,7 @@ function generatePassword() {
 	while (true) {
 		var pwdLength = prompt("How many characters in length is your password?");
 		//Password length limiters
-		if ((pwdLength > 8) && (pwdLength < 128)) {
+		if ((pwdLength >= 8) && (pwdLength <= 128)) {
 			break;
 		} else (alert("Your password must be at least 8 characters long and no more than 128 characters in length."));
 	}
@@ -37,11 +37,7 @@ function generatePassword() {
 		} else (alert("Your password must contain at least one type of character."));
 	}
 	
-	bigStr = '';
-	var lowerStr = '';
-	var upperStr = '';
-	var numericStr = '';
-	var specialStr = '';
+
 	//Generates string of characters
 	function stringMaker(length, asciiMin, asciiMax) {
 		var str = '';
@@ -50,22 +46,40 @@ function generatePassword() {
 		}
 		return str;
 	}
-	//Parameters for specific types of characters
 
+	bigStr = '';
+	//Parameters for specific types of characters
 	if (pwdLower) {
-		lowerStr += stringMaker(pwdLength, 97, 122);
+		bigStr += stringMaker(pwdLength, 97, 122);
 	}
 	if (pwdUpper) {
-		upperStr += stringMaker(pwdLength, 65, 90);
+		bigStr += stringMaker(pwdLength, 65, 90);
 	}
 	if (pwdNumeric) {
-		numericStr += stringMaker(pwdLength, 48, 57);
+		bigStr += stringMaker(pwdLength, 48, 57);
 	}
 	if (pwdSpecial) {
-		specialStr += stringMaker(pwdLength, 33, 47);
+		bigStr += stringMaker(pwdLength, 33, 47);
 	}
-	
-	return lowerStr + upperStr;
+	//String Before randomize
+	console.log(bigStr);
+	//Converting string to array
+	var bigArray = bigStr.split('');
+	//Blank string to return at end of function
+	var masterStr = '';
+	//String shuffler
+	for (i = 0; i < (bigArray.length - 1); i++) {
+		//Random index j
+		var j = randomNum(0, (bigArray.length));
+		//Stored element value from array
+		var temp = bigArray[i];
+		//Swap element index i to index j
+		bigArray[i] = bigArray[j];
+		//Copy element value to index j
+		bigArray[j] = temp;
+	}
+	masterStr = bigArray.join('');
+	return masterStr;
 	
 };
 
