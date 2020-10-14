@@ -1,7 +1,7 @@
-// Assignment Code
+//Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
+// Write password to the password output field on html
 function writePassword() {
 	var password = generatePassword();
 	var passwordText = document.querySelector("#password");
@@ -11,7 +11,7 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
+//When generate password button clicked
 generateBtn.addEventListener("click", writePassword);
 
 
@@ -37,11 +37,22 @@ function generatePassword() {
 		} else (alert("Your password must contain at least one type of character."));
 	}
 	
+	//Generates fraction so that password length is divided evenly by char types
+	function fractioner() {
+		var num = 0;
+		var charTypeArray = [pwdLower, pwdUpper, pwdNumeric, pwdSpecial];
+		for (i = 0; i <charTypeArray.length; i++) {
+			if (charTypeArray[i] === true) {
+				num++;
+			}
+		}
+		return num;
+	}
 
 	//Generates string of characters
-	function stringMaker(length, asciiMin, asciiMax) {
+	function stringMaker(length, fraction, asciiMin, asciiMax) {
 		var str = '';
-		for (i = 0; i < length; i++) {
+		for (i = 0; i < (length/fraction); i++) {
 			str += (String.fromCharCode(randomNum(asciiMin, asciiMax)));
 		}
 		return str;
@@ -50,16 +61,16 @@ function generatePassword() {
 	bigStr = '';
 	//Parameters for specific types of characters
 	if (pwdLower) {
-		bigStr += stringMaker(pwdLength, 97, 122);
+		bigStr += stringMaker(pwdLength, (fractioner()), 97, 122);
 	}
 	if (pwdUpper) {
-		bigStr += stringMaker(pwdLength, 65, 90);
+		bigStr += stringMaker(pwdLength, (fractioner()), 65, 90);
 	}
 	if (pwdNumeric) {
-		bigStr += stringMaker(pwdLength, 48, 57);
+		bigStr += stringMaker(pwdLength, (fractioner()), 48, 57);
 	}
 	if (pwdSpecial) {
-		bigStr += stringMaker(pwdLength, 33, 47);
+		bigStr += stringMaker(pwdLength, (fractioner()), 33, 47);
 	}
 	//String Before randomize
 	console.log(bigStr);
@@ -69,14 +80,10 @@ function generatePassword() {
 	var masterStr = '';
 	//String shuffler
 	for (i = 0; i < (bigArray.length - 1); i++) {
-		//Random index j
-		var j = randomNum(0, (bigArray.length));
-		//Stored element value from array
-		var temp = bigArray[i];
-		//Swap element index i to index j
-		bigArray[i] = bigArray[j];
-		//Copy element value to index j
-		bigArray[j] = temp;
+		var j = randomNum(0, (bigArray.length));	//Random index j
+		var temp = bigArray[i];						//Stored element value from array
+		bigArray[i] = bigArray[j];					//Swap element index i to index j
+		bigArray[j] = temp; 						//Copy element value to index j
 	}
 	masterStr = bigArray.join('');
 	return masterStr;
