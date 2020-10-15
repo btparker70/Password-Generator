@@ -36,48 +36,6 @@ function generatePassword() {
 		} else (alert("Your password must contain at least one type of character."));
 	}
 
-//Test upper
-	var lowerBank = String.fromCharCode(randomNum(97, 122));
-	var upperBank = String.fromCharCode(randomNum(65, 90));
-	var numericBank = String.fromCharCode(randomNum(48, 57));
-	var specialBank = String.fromCharCode(randomNum(33, 47));
-	
-	var bankArray = [];
-	var counter = 0;
-	while (counter < pwdLength) {
-			if (lowerBank) {
-				bankArray.push(String.fromCharCode(randomNum(97, 122)));
-				counter++;
-			}
-			if (upperBank) {
-				bankArray.push(String.fromCharCode(randomNum(65, 90)));
-				counter++;
-			}
-			if (numericBank) {
-				bankArray.push(String.fromCharCode(randomNum(48, 57)));
-				counter++;
-			}
-			if (specialBank) {
-				bankArray.push(String.fromCharCode(randomNum(33, 47)));
-				counter++;
-			}
-	}
-
-	unrandomString2 = '';
-	console.log(bankArray);
-	//Generates string of chars
-	function stringMaker2() {
-    	var str = '';
-
-    	for (i = 0; i < pwdLength; i++) {
-        	str += bankArray[((i) % bankArray.length)];
-    	}
-    	return str;
-	}
-console.log("stringmaker2 " + stringMaker2());
-
-//Test Lower
-
 	//Generates fraction so that password length is divided evenly by char types
 	function fractioner() {
 		var num = 0;
@@ -116,7 +74,7 @@ console.log("stringmaker2 " + stringMaker2());
 	//String Before randomize
 	console.log(bigStr);
 	//Converting string to array
-	var bigArray = (stringMaker2()).split('');
+	var bigArray = bigStr.split('');
 	//Blank string to return at end of function
 	var masterStr = '';
 	//String shuffler
