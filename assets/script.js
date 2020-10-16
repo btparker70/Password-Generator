@@ -1,18 +1,21 @@
-// Assignment Code
+// Assignment code
 var generateBtn = document.querySelector("#generate");
 
-// Writes password to the password output field on index.html
+// Generate random number
+function randomNum(min, max) {
+	return Math.floor(Math.random() * (max - min) + min);
+}
+
+// Writes password to the textarea
 function writePassword() {
 	var password = generatePassword();
 	var passwordText = document.querySelector("#password");
-
 	passwordText.value = password;
 }
 
-// When Generate Password button clicked on index.html
+// Event listener for Generate Password button
 generateBtn.addEventListener("click", writePassword);
 
-//Functionality Code
 //Function that generates a password
 function generatePassword() {
 	//Prompts user for desired password length
@@ -36,87 +39,68 @@ function generatePassword() {
 		} else (alert("Your password must contain at least one type of character."));
 	}
 
-//Test upper
+	// Generates random character for each character type
 	var lowerBank = String.fromCharCode(randomNum(97, 122));
 	var upperBank = String.fromCharCode(randomNum(65, 90));
 	var numericBank = String.fromCharCode(randomNum(48, 57));
 	var specialBank = String.fromCharCode(randomNum(33, 47));
-	
-	var bankArray = [];
+
+	// Generates array of characters for password
+	var charArray = [];
 	var counter = 0;
 	while (counter < pwdLength) {
-			if (lowerBank) {
-				bankArray.push(String.fromCharCode(randomNum(97, 122)));
-				counter++;
-			}
-			if (upperBank) {
-				bankArray.push(String.fromCharCode(randomNum(65, 90)));
-				counter++;
-			}
-			if (numericBank) {
-				bankArray.push(String.fromCharCode(randomNum(48, 57)));
-				counter++;
-			}
-			if (specialBank) {
-				bankArray.push(String.fromCharCode(randomNum(33, 47)));
-				counter++;
-			}
-	}
-
-	unrandomString2 = '';
-	console.log(bankArray);
-	//Generates string of chars
-	function stringMaker2() {
-    	var str = '';
-
-    	for (i = 0; i < pwdLength; i++) {
-        	str += bankArray[((i) % bankArray.length)];
-    	}
-    	return str;
-	}
-console.log("stringmaker2 " + stringMaker2());
-
-//Test Lower
-
-	//Generates fraction so that password length is divided evenly by char types
-	function fractioner() {
-		var num = 0;
-		var charTypeArray = [pwdLower, pwdUpper, pwdNumeric, pwdSpecial];
-		for (i = 0; i <charTypeArray.length; i++) {
-			if (charTypeArray[i] === true) {
-				num++;
-			}
+		if (pwdLower) {
+			charArray.push(String.fromCharCode(randomNum(97, 122)));
+			counter++;
 		}
-		return num;
+		if (pwdUpper) {
+			charArray.push(String.fromCharCode(randomNum(65, 90)));
+			counter++;
+		}
+		if (pwdNumeric) {
+			charArray.push(String.fromCharCode(randomNum(48, 57)));
+			counter++;
+		}
+		if (pwdSpecial) {
+			charArray.push(String.fromCharCode(randomNum(33, 47)));
+			counter++;
+		}
 	}
 
-	//Generates string of characters
-	function stringMaker(length, fraction, asciiMin, asciiMax) {
+//test start
+//Array for on/off char type
+	// var charTypeArray = [pwdLower, pwdUpper, pwdNumeric, pwdSpecial];
+	// counter2 = 0;
+	// while (counter2 < pwdLength) {
+	// 	for (i = 0; i < pwdLength; i++) {
+	// 		function generateChar(charType, asciiMin, asciiMax) {
+	// 			charArray.push(String.fromCharCode(randomNum(asciiMin, asciiMax)));
+				
+	// 		}
+	// 	}
+	// }
+
+//test end
+
+
+	//Generates string of chars = password length without omitting any desired char types
+	function stringMaker() {
 		var str = '';
-		for (i = 0; i < (length/fraction); i++) {
-			str += (String.fromCharCode(randomNum(asciiMin, asciiMax)));
+		for (i = 0; i < pwdLength; i++) {
+			str += charArray[((i) % charArray.length)];
 		}
 		return str;
 	}
+	
+	console.log("chararray " + charArray);
+	console.log("tostring " + charArray.toString());
+	console.log("stringMaker " + stringMaker());
 
-	bigStr = '';
-	//Parameters for specific types of characters
-	if (pwdLower) {
-		bigStr += stringMaker(pwdLength, (fractioner()), 97, 122);
-	}
-	if (pwdUpper) {
-		bigStr += stringMaker(pwdLength, (fractioner()), 65, 90);
-	}
-	if (pwdNumeric) {
-		bigStr += stringMaker(pwdLength, (fractioner()), 48, 57);
-	}
-	if (pwdSpecial) {
-		bigStr += stringMaker(pwdLength, (fractioner()), 33, 47);
-	}
-	//String Before randomize
-	console.log(bigStr);
+
+
+
 	//Converting string to array
-	var bigArray = (stringMaker2()).split('');
+	var bigArray = (stringMaker()).split('');
 	//Blank string to return at end of function
 	var masterStr = '';
 	//String shuffler
@@ -128,90 +112,42 @@ console.log("stringmaker2 " + stringMaker2());
 	}
 	masterStr = bigArray.join('');
 	return masterStr;
-	
+
 };
 
-// return bigStr.concat(lowerStr, upperStr, numericStr, specialStr);
 
-//console.log(String.fromCharCode(65));
-
-//Random uppercase 97-122
-Math.random
-
-//Random Number Generator Function
-function randomNum(min, max) {
-	return Math.floor(Math.random() * (max - min) + min);
-}
-
-//console.log(randomNum(97, 122));
-// console.log(String.fromCharCode(randomNum(97, 122)));
-
-// function lowerMaker() {
-// 	var word = '';
-// 	for (i = 0; i < 10; i++) {
-// 		word += (String.fromCharCode(randomNum(97, 122)));
-// 	}
-// 	console.log(word);
-// }
-
-// var lowerBool = false;
-
-// if (lowerBool === true) {
-// 	lowerMaker();
-// 	console.log("On");
-// } else {
-// 	console.log("Off")
-// }
-
-
-//Generates random lowercase characters
-	// while (pwdLower) {
-	// 	function lowerMaker(length) {
-	// 		var str = '';
-	// 		for (i = 0; i < 10; i++) {
-	// 			str += (String.fromCharCode(randomNum(97, 122)));
+	// //Generates fraction so that password length is divided evenly by char types
+	// function fractioner() {
+	// 	var num = 0;
+	// 	var charTypeArray = [pwdLower, pwdUpper, pwdNumeric, pwdSpecial];
+	// 	for (i = 0; i < charTypeArray.length; i++) {
+	// 		if (charTypeArray[i] === true) {
+	// 			num++;
 	// 		}
-	// 		return str;
 	// 	}
-	// 	return bigStr.concat(lowerMaker(pwdLength));
+	// 	return num;
 	// }
-	//Generates random uppercase characters
-	// while (pwdUpper) {
-	// 	function upperMaker(length) {
-	// 		var str = '';
-	// 		for (i = 0; i < 10; i++) {
-	// 			str += (String.fromCharCode(randomNum(65, 90)));
-	// 		}
-	// 		return str;
-	// 	}
-	// 	return bigStr.concat(upperMaker(pwdLength));
-	// }
-	// //Generates random numeric characters
-	// while (pwdNumeric) {
-	// 	function numericMaker(length) {
-	// 		var str = '';
-	// 		for (i = 0; i < 10; i++) {
-	// 			str += (String.fromCharCode(randomNum(48, 57)));
-	// 		}
-	// 		return str;
-	// 	}
-	// 	return numericStr;
-	// }
-	// //Generates random special characters
-	// while (pwdSpecial) {
-	// 	function specialMaker(length) {
-	// 		var str = '';
-	// 		for (i = 0; i < 10; i++) {
-	// 			str += (String.fromCharCode(randomNum(33, 47)));
-	// 		}
-	// 		return str;
-	// 	}
-	// 	return specialStr;
-	// }
-	//Combines strings
 
-// var lowerBank = String.fromCharCode(randomNum(97, 122));
-// var upperBank = String.fromCharCode(randomNum(65, 90));
-// var numericBank = String.fromCharCode(randomNum(48, 57));
-// var specialBank = String.fromCharCode(randomNum(33, 47));
-// console.log(lowerBank, upperBank, numericBank, specialBank);
+	// //Generates string of characters
+	// function stringMaker(length, fraction, asciiMin, asciiMax) {
+	// 	var str = '';
+	// 	for (i = 0; i < (length / fraction); i++) {
+	// 		str += (String.fromCharCode(randomNum(asciiMin, asciiMax)));
+	// 	}
+	// 	return str;
+	// }
+
+	// bigStr = '';
+	// //Parameters for specific types of characters
+	// if (pwdLower) {
+	// 	bigStr += stringMaker(pwdLength, (fractioner()), 97, 122);
+	// }
+	// if (pwdUpper) {
+	// 	bigStr += stringMaker(pwdLength, (fractioner()), 65, 90);
+	// }
+	// if (pwdNumeric) {
+	// 	bigStr += stringMaker(pwdLength, (fractioner()), 48, 57);
+	// }
+	// if (pwdSpecial) {
+	// 	bigStr += stringMaker(pwdLength, (fractioner()), 33, 47);
+	// }
